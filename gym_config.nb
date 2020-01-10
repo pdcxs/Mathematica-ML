@@ -1,0 +1,398 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15744,        390]
+NotebookOptionsPosition[     12351,        341]
+NotebookOutlinePosition[     12706,        357]
+CellTagsIndexPosition[     12663,        354]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["How to Configure Gym Environment", "Title",
+ CellChangeTimes->{{3.7876160784805675`*^9, 
+  3.7876161293040347`*^9}},ExpressionUUID->"17b397ad-6bc3-40f3-ac52-\
+a2cce42bf6c2"],
+
+Cell[TextData[{
+ "Lots of machine learning algorithms need some environments to be tested. \
+Gym is a nice choice. Mathematica has already some built-in function like ",
+ StyleBox["DeviceOpen[\[OpenCurlyDoubleQuote]OpenAIGym\[CloseCurlyDoubleQuote]\
+,\[CloseCurlyDoubleQuote]Atlantis-v0\[CloseCurlyDoubleQuote]]", "CodeText"],
+ ". But still need some python configuration."
+}], "Text",
+ CellChangeTimes->{{3.7876161540832863`*^9, 3.7876162195633087`*^9}, {
+  3.787616256005228*^9, 
+  3.787616307968661*^9}},ExpressionUUID->"37a0185c-966d-42f3-8a41-\
+7ab752e7bae6"],
+
+Cell["\<\
+I use anaconda to configure the environment.
+First, create a new environment:\
+\>", "Text",
+ CellChangeTimes->{{3.7876163158054295`*^9, 
+  3.787616349217431*^9}},ExpressionUUID->"f3ed85eb-7cb1-44c7-8761-\
+3e2c2daf269f"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{
+    RowBox[{"conda", " ", "create"}], " ", "-", 
+    RowBox[{"n", " ", "gym", " ", "python"}]}], "=", "3.7"}],
+  FontWeight->"Bold"]], "Code",
+ CellChangeTimes->{{3.7876163575131702`*^9, 3.787616394884042*^9}, {
+  3.787617676048094*^9, 
+  3.7876176940535583`*^9}},ExpressionUUID->"8ff1e44b-ed5d-412a-8fc7-\
+de390de149b4"],
+
+Cell[TextData[{
+ "Here, python need to be equal or ",
+ StyleBox["less",
+  FontWeight->"Bold"],
+ " than 3.7. Higher version will cause problem when connect to Mathematica.\n\
+Then, activate this environment."
+}], "Text",
+ CellChangeTimes->{{3.7876164105745735`*^9, 
+  3.7876164710857477`*^9}},ExpressionUUID->"c2435814-7b75-4e9a-9b6c-\
+75d37867f959"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"conda", " ", "activate", " ", "gym"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.7876164762295837`*^9, 3.787616480619444*^9}, {
+  3.787617672518201*^9, 
+  3.787617672523201*^9}},ExpressionUUID->"e918d589-c7aa-4994-b206-\
+beb6a47ec435"],
+
+Cell["You need to install gym, of cause.", "Text",
+ CellChangeTimes->{{3.7876165020578117`*^9, 
+  3.787616514384433*^9}},ExpressionUUID->"b206504e-0839-459b-b68f-\
+a2fd8a92c765"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"pip", " ", "install", " ", "gym"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.7876165651976*^9, 3.7876165705704985`*^9}, {
+  3.7876176674053555`*^9, 
+  3.7876176674103546`*^9}},ExpressionUUID->"dc36d5f7-5484-4023-973a-\
+dd095facc999"],
+
+Cell["To connect to Mathematica, pyzmq is also needed.", "Text",
+ CellChangeTimes->{{3.787616589384923*^9, 
+  3.787616612107236*^9}},ExpressionUUID->"27d50f98-4382-42ba-b1c3-\
+292b4b428a14"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"pip", " ", "install", " ", "pyzmq"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.787616617628061*^9, 3.787616621460961*^9}, {
+  3.787617662901492*^9, 
+  3.7876176629075003`*^9}},ExpressionUUID->"24ce6276-4349-46d8-aacb-\
+76c3bbec98b7"],
+
+Cell["Some games need box2d, especially the contineous games.", "Text",
+ CellChangeTimes->{{3.7876166345365534`*^9, 
+  3.78761668475465*^9}},ExpressionUUID->"19bc2e91-9479-4486-9736-\
+80a22a3339dd"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"pip", " ", "install", " ", "box2d", " ", "box2d"}], "-", 
+   "kengz"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.787616689913486*^9, 3.7876166974272604`*^9}, {
+  3.7876170946500473`*^9, 3.787617095316036*^9}, {3.7876176555577126`*^9, 
+  3.787617655563714*^9}},ExpressionUUID->"b2fd4be3-2699-4d91-86b9-\
+7e07984f63ef"],
+
+Cell[TextData[{
+ "If this install failed, it may ask for swig.exe. Then you can install it by \
+",
+ ButtonBox["scoop",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://scoop.sh/"], None},
+  ButtonNote->"https://scoop.sh/"],
+ " or ",
+ ButtonBox["chocolatey",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://chocolatey.org/"], None},
+  ButtonNote->"https://chocolatey.org/"],
+ ", for example:"
+}], "Text",
+ CellChangeTimes->{{3.7876174968292894`*^9, 3.7876175271476*^9}, {
+  3.7876175616225586`*^9, 
+  3.787617579261017*^9}},ExpressionUUID->"ab557c48-7bd8-4b67-98ad-\
+c0d6cc5d47a2"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"scoop", " ", "install", " ", "swig"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.7876175020191317`*^9, 3.7876175052640357`*^9}, {
+  3.78761765131785*^9, 
+  3.787617651323841*^9}},ExpressionUUID->"f53e6d50-8831-4b85-b4cf-\
+bb2255147470"],
+
+Cell["\<\
+Then you need to register a python interpreter. Open anaconda prompt, \
+activate the gym environment, and input:\
+\>", "Text",
+ CellChangeTimes->{{3.7876172633248615`*^9, 3.7876172967338543`*^9}, {
+  3.787617445664826*^9, 
+  3.7876174921194324`*^9}},ExpressionUUID->"0cc89eef-2845-4c07-9e7e-\
+7324f65e6817"],
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{"where", " ", "python"}], "CodeText"]], "Code",
+ CellChangeTimes->{{3.7876173074525394`*^9, 3.7876173098804655`*^9}, {
+  3.787617644990032*^9, 
+  3.787617644995033*^9}},ExpressionUUID->"1c9b42c3-9f17-43e3-b8d2-\
+f7d386fc3a8d"],
+
+Cell["\<\
+Then find the python interpreter in gym environment.
+Then find your external evaluators:\
+\>", "Text",
+ CellChangeTimes->{{3.78761732018715*^9, 
+  3.787617362353873*^9}},ExpressionUUID->"1f11d24b-3013-465f-acec-\
+a6d60aa02c82"],
+
+Cell[BoxData[
+ RowBox[{"FindExternalEvaluators", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.7876173670197453`*^9, 3.787617372015584*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"a4d96947-32de-4cd8-a34e-681e07c4743b"],
+
+Cell["Then register your python gym environment:", "Text",
+ CellChangeTimes->{{3.7876176076071615`*^9, 
+  3.7876176221717215`*^9}},ExpressionUUID->"fbe01424-b7fc-482b-8bd6-\
+7e57128837f8"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Notice", ":", " ", 
+    RowBox[{
+    "The", " ", "path", " ", "need", " ", "to", " ", "be", " ", "changed", 
+     " ", "according", " ", "to", " ", "your", " ", "environment"}]}], "*)"}],
+   "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"RegisterExternalEvaluator", "[", 
+    RowBox[{
+    "\"\<Python\>\"", ",", 
+     "\"\<E:\\\\ProgramData\\\\Anaconda3\\\\envs\\\\gym-test\\\\python.exe\>\"\
+"}], "]"}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.7876177138379526`*^9, 3.7876177320194054`*^9}, {
+  3.7876177668113403`*^9, 3.787617832619354*^9}},
+ CellLabel->"In[4]:=",ExpressionUUID->"fe680883-6b40-456f-a666-eebb2215bb66"],
+
+Cell["Finally, we need to configure the import in python:", "Text",
+ CellChangeTimes->{{3.7876179374311934`*^9, 
+  3.787617953263715*^9}},ExpressionUUID->"8c79e9b4-eaeb-4ffa-bf63-\
+ef445d57b854"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExternalEvaluate", "[", 
+   RowBox[{"\"\<Python\>\"", ",", "\"\<import gym\>\""}], "]"}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.787617969272231*^9, 3.787617986452712*^9}},
+ CellLabel->"In[5]:=",ExpressionUUID->"178df643-42fa-4369-a928-65740639aaf8"],
+
+Cell[TextData[{
+ "This is an excellent example to explain the usage: ",
+ ButtonBox["Train an agent in a reinforcement learning environment",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://www.wolfram.com/language/12/neural-network-framework/train-\
+an-agent-in-a-reinforcement-learning-environment.html.zh?product=mathematica"]\
+, None},
+  ButtonNote->
+   "https://www.wolfram.com/language/12/neural-network-framework/train-an-\
+agent-in-a-reinforcement-learning-environment.html.zh?product=mathematica"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.78761695835114*^9, 3.7876169800314856`*^9}, {
+  3.787617021696228*^9, 3.787617038200738*^9}, {3.787617070879774*^9, 
+  3.787617086128313*^9}},ExpressionUUID->"602d839e-9db7-4470-91a8-\
+90c1039b7014"],
+
+Cell["Let\[CloseCurlyQuote]s test our environment.", "Text",
+ CellChangeTimes->{{3.78761788421581*^9, 
+  3.787617890869594*^9}},ExpressionUUID->"6db825d1-d28a-4d01-b966-\
+75f3a9fab4fd"],
+
+Cell[BoxData[{
+ RowBox[{"env", "=", 
+  RowBox[{
+  "DeviceOpen", "[", "\"\<SimulatedCartPole\>\"", 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"DeviceExecute", "[", 
+  RowBox[{"env", ",", "\"\<Render\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7876178961704416`*^9, 3.787617904334183*^9}, {
+  3.7876180112849655`*^9, 3.7876180440064225`*^9}, {3.7876181125363617`*^9, 
+  3.787618127147914*^9}, {3.7876181761864405`*^9, 3.7876181791853313`*^9}, {
+  3.7876182411253433`*^9, 3.7876182875393143`*^9}},
+ CellLabel->"In[19]:=",ExpressionUUID->"3ca062df-343a-476c-8c1d-4d3fbf5e1c4a"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"actions", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"DeviceExecute", "[", 
+      RowBox[{"env", ",", "\"\<RandomAction\>\""}], "]"}], ",", "50"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"DeviceExecute", "[", 
+   RowBox[{"env", ",", "\"\<Reset\>\""}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"images", ",", "states"}], "}"}], "=", 
+   RowBox[{
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"s", "=", 
+         RowBox[{"DeviceExecute", "[", 
+          RowBox[{"env", ",", "\"\<Step\>\"", ",", "act"}], "]"}]}], ";", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"DeviceExecute", "[", 
+           RowBox[{"env", ",", "\"\<Render\>\""}], "]"}], ",", "s"}], "}"}]}],
+        ")"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"act", ",", "actions"}], "}"}]}], "]"}], "//", "Transpose"}]}],
+   ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ListAnimate", "[", "images", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"First", "[", "states", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"DeviceClose", "[", "env", "]"}]}], "Input",
+ CellChangeTimes->{{3.7876183412064953`*^9, 3.7876183695874057`*^9}, {
+  3.7876185234114122`*^9, 3.787618533448599*^9}, {3.787618574093649*^9, 
+  3.787618581988439*^9}, {3.787618640636141*^9, 3.7876188139379387`*^9}},
+ CellLabel->"In[53]:=",ExpressionUUID->"1eb8910e-4492-45da-8c1d-51a2e33bad21"],
+
+Cell["Another example, install atari environment:", "Text",
+ CellChangeTimes->{{3.7876188500954247`*^9, 
+  3.78761886124655*^9}},ExpressionUUID->"c5a0ed79-ade7-429a-9d73-\
+c21648596eac"],
+
+Cell[BoxData[
+ RowBox[{"pip", " ", "install", " ", "\"\<gym[atari]\>\""}]], "Code",
+ CellChangeTimes->{{3.7876188710546746`*^9, 
+  3.7876188802495728`*^9}},ExpressionUUID->"49d2dd29-8d53-46ce-8154-\
+33394ee4c5fc"],
+
+Cell[BoxData[{
+ RowBox[{"env", "=", 
+  RowBox[{"DeviceOpen", "[", 
+   RowBox[{"\"\<OpenAIGym\>\"", ",", "\"\<Atlantis-v0\>\""}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"observe1", "=", 
+  RowBox[{"DeviceRead", "[", "env", "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Image", "[", 
+  RowBox[{"observe1", "[", "\"\<ObservedState\>\"", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.787618893567438*^9, 3.7876189088497205`*^9}},
+ CellLabel->"In[59]:=",ExpressionUUID->"2e7946e1-b040-47b6-80b4-b8d00f25e87b"],
+
+Cell[BoxData[
+ RowBox[{"action", "=", 
+  RowBox[{"DeviceExecute", "[", 
+   RowBox[{"env", ",", "\"\<RandomAction\>\""}], "]"}]}]], "Input",
+ CellLabel->"In[62]:=",ExpressionUUID->"639edb1b-ff01-4a0b-bcc3-7a764350efab"],
+
+Cell[BoxData[
+ RowBox[{"observe2", "=", 
+  RowBox[{"DeviceExecute", "[", 
+   RowBox[{"env", ",", "\"\<Step\>\"", ",", "action"}], "]"}]}]], "Input",
+ CellLabel->"In[63]:=",ExpressionUUID->"37fc0b41-d1df-4df7-a918-4582bd2da53c"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"observe1", "[", "\"\<ObservedState\>\"", "]"}], "==", 
+  RowBox[{"observe2", "[", "\"\<ObservedState\>\"", "]"}]}]], "Input",
+ CellLabel->"In[64]:=",ExpressionUUID->"66a8d26c-e6e8-4b58-839a-122326b1b4bc"],
+
+Cell[BoxData[
+ RowBox[{"DeviceExecute", "[", 
+  RowBox[{"env", ",", "\"\<Reset\>\""}], "]"}]], "Input",
+ CellLabel->"In[65]:=",ExpressionUUID->"3ae70f39-b4c1-424d-920f-d18dfee3d633"],
+
+Cell[BoxData[
+ RowBox[{"DeviceClose", "[", "env", "]"}]], "Input",
+ CellLabel->"In[66]:=",ExpressionUUID->"20b3e1c7-7194-462b-a3d7-044ef68ceaf2"]
+}, Open  ]]
+},
+WindowSize->{958, 988},
+WindowMargins->{{Automatic, -7}, {Automatic, 0}},
+FrontEndVersion->"12.0 for Microsoft Windows (64-bit) (2019\:5e745\:670818\
+\:65e5)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 179, 3, 96, "Title",ExpressionUUID->"17b397ad-6bc3-40f3-ac52-a2cce42bf6c2"],
+Cell[762, 27, 564, 10, 56, "Text",ExpressionUUID->"37a0185c-966d-42f3-8a41-7ab752e7bae6"],
+Cell[1329, 39, 229, 6, 56, "Text",ExpressionUUID->"f3ed85eb-7cb1-44c7-8761-3e2c2daf269f"],
+Cell[1561, 47, 369, 10, 50, "Code",ExpressionUUID->"8ff1e44b-ed5d-412a-8fc7-de390de149b4"],
+Cell[1933, 59, 349, 9, 56, "Text",ExpressionUUID->"c2435814-7b75-4e9a-9b6c-75d37867f959"],
+Cell[2285, 70, 273, 6, 55, "Code",ExpressionUUID->"e918d589-c7aa-4994-b206-beb6a47ec435"],
+Cell[2561, 78, 178, 3, 34, "Text",ExpressionUUID->"b206504e-0839-459b-b68f-a2fd8a92c765"],
+Cell[2742, 83, 272, 6, 55, "Code",ExpressionUUID->"dc36d5f7-5484-4023-973a-dd095facc999"],
+Cell[3017, 91, 190, 3, 34, "Text",ExpressionUUID->"27d50f98-4382-42ba-b1c3-292b4b428a14"],
+Cell[3210, 96, 272, 6, 55, "Code",ExpressionUUID->"24ce6276-4349-46d8-aacb-76c3bbec98b7"],
+Cell[3485, 104, 198, 3, 34, "Text",ExpressionUUID->"19bc2e91-9479-4486-9736-80a22a3339dd"],
+Cell[3686, 109, 368, 8, 55, "Code",ExpressionUUID->"b2fd4be3-2699-4d91-86b9-7e07984f63ef"],
+Cell[4057, 119, 601, 19, 34, "Text",ExpressionUUID->"ab557c48-7bd8-4b67-98ad-c0d6cc5d47a2"],
+Cell[4661, 140, 274, 6, 55, "Code",ExpressionUUID->"f53e6d50-8831-4b85-b4cf-bb2255147470"],
+Cell[4938, 148, 317, 7, 34, "Text",ExpressionUUID->"0cc89eef-2845-4c07-9e7e-7324f65e6817"],
+Cell[5258, 157, 261, 6, 55, "Code",ExpressionUUID->"1c9b42c3-9f17-43e3-b8d2-f7d386fc3a8d"],
+Cell[5522, 165, 237, 6, 56, "Text",ExpressionUUID->"1f11d24b-3013-465f-acec-a6d60aa02c82"],
+Cell[5762, 173, 216, 3, 28, "Input",ExpressionUUID->"a4d96947-32de-4cd8-a34e-681e07c4743b"],
+Cell[5981, 178, 188, 3, 34, "Text",ExpressionUUID->"fbe01424-b7fc-482b-8bd6-7e57128837f8"],
+Cell[6172, 183, 680, 16, 48, "Input",ExpressionUUID->"fe680883-6b40-456f-a666-eebb2215bb66"],
+Cell[6855, 201, 195, 3, 34, "Text",ExpressionUUID->"8c79e9b4-eaeb-4ffa-bf63-ef445d57b854"],
+Cell[7053, 206, 288, 6, 28, "Input",ExpressionUUID->"178df643-42fa-4369-a928-65740639aaf8"],
+Cell[7344, 214, 756, 16, 34, "Text",ExpressionUUID->"602d839e-9db7-4470-91a8-90c1039b7014"],
+Cell[8103, 232, 185, 3, 34, "Text",ExpressionUUID->"6db825d1-d28a-4d01-b966-75f3a9fab4fd"],
+Cell[8291, 237, 580, 11, 48, "Input",ExpressionUUID->"3ca062df-343a-476c-8c1d-4d3fbf5e1c4a"],
+Cell[8874, 250, 1518, 38, 143, "Input",ExpressionUUID->"1eb8910e-4492-45da-8c1d-51a2e33bad21"],
+Cell[10395, 290, 186, 3, 34, "Text",ExpressionUUID->"c5a0ed79-ade7-429a-9d73-c21648596eac"],
+Cell[10584, 295, 213, 4, 50, "Code",ExpressionUUID->"49d2dd29-8d53-46ce-8154-33394ee4c5fc"],
+Cell[10800, 301, 509, 10, 67, "Input",ExpressionUUID->"2e7946e1-b040-47b6-80b4-b8d00f25e87b"],
+Cell[11312, 313, 218, 4, 28, "Input",ExpressionUUID->"639edb1b-ff01-4a0b-bcc3-7a764350efab"],
+Cell[11533, 319, 227, 4, 28, "Input",ExpressionUUID->"37fc0b41-d1df-4df7-a918-4582bd2da53c"],
+Cell[11763, 325, 239, 4, 28, "Input",ExpressionUUID->"66a8d26c-e6e8-4b58-839a-122326b1b4bc"],
+Cell[12005, 331, 182, 3, 28, "Input",ExpressionUUID->"3ae70f39-b4c1-424d-920f-d18dfee3d633"],
+Cell[12190, 336, 145, 2, 28, "Input",ExpressionUUID->"20b3e1c7-7194-462b-a3d7-044ef68ceaf2"]
+}, Open  ]]
+}
+]
+*)
+
