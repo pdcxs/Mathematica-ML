@@ -14,7 +14,6 @@ NotebookDataLength[     11389,        282]
 NotebookOptionsPosition[     11036,        267]
 NotebookOutlinePosition[     11433,        284]
 CellTagsIndexPosition[     11390,        281]
-WindowTitle->Run: 18/1000, score: 56
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
